@@ -1,29 +1,25 @@
 defmodule Practice.Factors do
 
   def parse_int(text) do
-    IO.inspect(text)
-    {n, _} = Integer.parse(text)
-    n
+    {num, _} = Integer.parse(text)
+    num
   end
 
-  def factor(num) do
-    prime_factors(parse_int(num)) |> inspect
+  def factor(x) do
+    factor(parse_int(x), 2, [], false)
   end
 
-  def prime_factors(num , next \\ 2)
-  def prime_factors(num, 2) do
-    cond do
-      rem(num, 2) == 0 -> [2 | prime_factors(div(num, 2))]
-      4 > num          -> [num]
-      true             -> prime_factors(num, 3)
+  def factor(x, fact, acc, flag) when
+    x == 1 do
+      acc |> inspect  
     end
-  end
-  def prime_factors(num, next) do
-    cond do
-      rem(num, next) == 0 -> [next | prime_factors(div(num, next))]
-      next + next > num   -> [num]
-      true                -> prime_factors(num, next + 2)
-    end
-  end
 
+  def factor(x, fact, acc, flag) when
+    flag do
+      factor(div(x, fact), 2, acc ++ [fact], Integer.mod(div(x, fact), 2) == 0)
+    end
+
+  def factor(x, fact, acc, flag) do
+      factor(x, fact + 1, acc, Integer.mod(x, fact + 1) == 0)
+    end
 end
