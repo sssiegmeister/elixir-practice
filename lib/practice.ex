@@ -18,8 +18,13 @@ defmodule Practice do
 
   def factor(x) do
     # Maybe delegate this too.
-    [1,2,x]
+    Practice.Factors.factor(x)
   end
 
-  # TODO: Add a palindrome? function.
+  def palindrome?(s) do
+    s 
+    |> String.downcase
+    |> String.replace(" ", "")
+    |> Practice.Palindrome.palindrome?
+  end
 end
