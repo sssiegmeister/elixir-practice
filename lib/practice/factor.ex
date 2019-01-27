@@ -11,7 +11,7 @@ defmodule Practice.Factors do
 
   def factor(x, fact, acc, flag) when
     x == 1 do
-      acc |> inspect  
+      acc |> inspect(charlists: :as_lists)  
     end
 
   def factor(x, fact, acc, flag) when
